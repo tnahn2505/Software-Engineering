@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/avatar-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/element-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/registration-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/reward-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/school-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/student-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/teacher-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/user-service/src/main/java" charset="UTF-8" />
+  </component>
+</project>
