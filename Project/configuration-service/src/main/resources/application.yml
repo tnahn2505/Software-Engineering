@@ -1,17 +1,13 @@
 spring:
   application:
     name: configuration-service
-    description:
+    description: Centralized Config Server
 
+  main:
+    allow-bean-definition-overriding: true
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
-
-  # data:
-  #   mongodb:
-  #     uri: "mongodb://localhost:27017"
-  #     database: configuration-service-db
-  #     host: localhost
-  #     port: 27017
 server:
   port: 8082
-
-
