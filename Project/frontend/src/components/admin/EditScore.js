@@ -53,7 +53,8 @@ const EditScore = ({ onLogout }) => {
 
     const validateScore = (value) => {
         if (value === '') return { isValid: true };
-        const score = parseFloat(value);
+        const strValue = String(value); // Đảm bảo value là chuỗi
+        const score = parseFloat(strValue);
         if (isNaN(score)) {
             return { isValid: false, message: 'Điểm phải là số' };
         }
@@ -64,7 +65,7 @@ const EditScore = ({ onLogout }) => {
             return { isValid: false, message: 'Điểm không được lớn hơn 10' };
         }
         // Kiểm tra số thập phân
-        if (value.includes('.') && value.split('.')[1].length > 1) {
+        if (strValue.includes('.') && strValue.split('.')[1].length > 1) {
             return { isValid: false, message: 'Điểm chỉ được có 1 chữ số thập phân' };
         }
         return { isValid: true };
@@ -135,7 +136,14 @@ const EditScore = ({ onLogout }) => {
         try {
             await studentApi.put(`/updateScore/${id}`, scoreData);
             alert('✅ Cập nhật điểm thành công!');
-            navigate('/students');
+            const role = localStorage.getItem('role');
+            if (role === 'ADMIN') {
+                navigate('/students');
+            } else if (role === 'TEACHER') {
+                navigate('/');
+            } else {
+                navigate('/');
+            }
         } catch (error) {
             console.error('Error updating scores:', error);
             setErrors({ 

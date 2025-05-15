@@ -7,24 +7,75 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: school_db
+      MYSQL_USER: root 
+      MYSQL_PASSWORD: 123456
     ports:
       - "3306:3306"
     networks:
       - school-net
+    volumes:
+      - mysql_data:/var/lib/mysql
 
-  springboot:
-    build: .
-    container_name: school-springboot
+  student-service:
+    build:
+      context: ./student-service
+    container_name: student-service
     depends_on:
       - mysql
-    ports:
-      - "8089:8089"
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/school_db
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 123456
+    ports:
+      - "8083:8083"
     networks:
       - school-net
+
+  teacher-service:
+    build:
+      context: ./teacher-service
+    container_name: teacher-service
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/school_db
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: 123456
+    ports:
+      - "8084:8084"
+    networks:
+      - school-net
+
+  user-service:
+    build:
+      context: ./user-service
+    container_name: user-service
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/school_db
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: 123456
+    ports:
+      - "8089:8089"
+    networks:
+      - school-net
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - student-service
+      - teacher-service
+      - user-service
+    networks:
+      - school-net
+
+volumes:
+  mysql_data:
 
 networks:
   school-net:
